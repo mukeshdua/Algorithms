@@ -45,7 +45,12 @@ public class Str {
 		return result.toString();
 	}
 
-	// Return excel sheet column number from string
+	/**
+	 * Return excel sheet column number from string
+	 * 
+	 * @param s
+	 * @return
+	 */
 	public static int titleToNumber(String s) {
 		if (s == null) {
 			return 0;
@@ -63,7 +68,12 @@ public class Str {
 		return sum;
 	}
 
-	// Length of last word in a string
+	/**
+	 * Length of last word in a string
+	 * 
+	 * @param s
+	 * @return
+	 */
 	public static int lengthOfLastWord(String s) {
 		if (s == null || s.trim().equals("")) {
 			return 0;
@@ -73,7 +83,12 @@ public class Str {
 		return str.length();
 	}
 
-	// Valid Parentheses
+	/**
+	 * Valid Parentheses
+	 * 
+	 * @param s
+	 * @return
+	 */
 	public static boolean isValid(String s) {
 		if (s.length() == 1) {
 			return false;
@@ -99,7 +114,7 @@ public class Str {
 
 	}
 
-	/*
+	/**
 	 * Given two strings s and t, determine if they are isomorphic. Given "egg", "add", return true. Given "foo", "bar", return false.
 	 */
 	public static boolean isIsomorphic(String s, String t) {
@@ -111,7 +126,7 @@ public class Str {
 
 	}
 
-	/*
+	/**
 	 * Given a sorted integer array without duplicates, return the summary of its ranges. For example, given [0,1,2,4,5,7], return ["0->2","4->5","7"].
 	 */
 	public static List<String> summaryRanges(int[] nums) {
@@ -151,7 +166,13 @@ public class Str {
 		return result;
 	}
 
-	// Valid Anagram
+	/**
+	 * Valid Anagram
+	 * 
+	 * @param s
+	 * @param t
+	 * @return
+	 */
 	public static boolean isAnagram(String s, String t) {
 
 		if (s == null || t == null) {
@@ -166,6 +187,37 @@ public class Str {
 
 		return isH1EqualsH2(sMap, tMap) && isH1EqualsH2(tMap, sMap);
 
+	}
+
+	/**
+	 * Compare two version numbers version1 and version2. If version1 > version2 return 1, if version1 < version2 return -1, otherwise return 0. You may assume
+	 * that the version strings are non-empty and contain only digits and the . character.
+	 * 
+	 * @param version1
+	 * @param version2
+	 * @return
+	 */
+	public static int compareVersion(String version1, String version2) {
+		int retValue = 0;
+
+		if (version1 != null && version2 != null) {
+			while (version1.contains(".") || version2.contains(".")) {
+				int ver1 = Integer.valueOf(version1.indexOf(".") == -1 ? version1 : version1.substring(0, version1.indexOf(".")));
+				int ver2 = Integer.valueOf(version2.indexOf(".") == -1 ? version2 : version2.substring(0, version2.indexOf(".")));
+
+				retValue= ver1 > ver2 ? 1 : (ver1 < ver2 ? -1 : 0);
+				if(retValue !=0)
+				{
+					return retValue;
+				}
+				version1=version1.indexOf(".") == -1 ? "0" : version1.substring(version1.indexOf(".")+1);
+				version2=version2.indexOf(".") == -1 ? "0" : version2.substring(version2.indexOf(".")+1);
+				
+			}
+			return Integer.valueOf(version1) > Integer.valueOf(version2) ? 1 : (Integer.valueOf(version1) < Integer.valueOf(version2) ? -1 : 0);
+
+		}
+		return retValue;
 	}
 
 }

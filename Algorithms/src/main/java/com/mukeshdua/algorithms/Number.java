@@ -17,7 +17,11 @@ public class Number {
 		return squareSum;
 	}
 
-	// Write an algorithm to determine if a number is "happy".
+	/**
+	 * Write an algorithm to determine if a number is "happy".
+	 * @param number
+	 * @return
+	 */
 	public static boolean isHappy(int number) {
 		HashSet<Integer> set = new HashSet<Integer>();
 		while (!set.contains(number)) {
@@ -30,7 +34,11 @@ public class Number {
 		return false;
 	}
 
-	// Is particular number prime
+	/**
+	 * Is particular number prime
+	 * @param number
+	 * @return
+	 */
 	public static Boolean isNumberPrime(int number) {
 		if (number == 2) {
 			return true;
@@ -47,7 +55,11 @@ public class Number {
 		return true;
 	}
 
-	// Count number of primes
+	/**
+	 * Count number of primes
+	 * @param number
+	 * @return
+	 */
 	public static int countPrimes(int number) {
 		if (number <= 2) {
 			return 0;
@@ -62,7 +74,11 @@ public class Number {
 
 	}
 
-	// Palindrome number
+	/**
+	 * Palindrome number
+	 * @param num
+	 * @return
+	 */
 	public static boolean isPalindrome(int num) {
 		if (num < 0) {
 			return false;
@@ -80,7 +96,11 @@ public class Number {
 		return false;
 	}
 
-	// Reverse integer
+	/**
+	 * Reverse integer
+	 * @param num
+	 * @return
+	 */
 	public static int reverse(int num) {
 		long reverse = 0;
 		while (num != 0) {
@@ -92,14 +112,33 @@ public class Number {
 		}
 		return (int) reverse;
 	}
-	
-	//Is particular number of two
+
+	/**
+	 * Is particular number of two
+	 * @param n
+	 * @return
+	 */
 	public static boolean isPowerOfTwo(int n) {
 		if (n <= 0) {
 			return false;
 		}
 		return (n & (n - 1)) == 0;
 
+	}
+
+	/***
+	 * Find trailing zeros in factorial
+	 */
+	public int trailingZeroes(int n) {
+		if (n < 0)
+			return -1;
+
+		int count = 0;
+		for (long i = 5; n / i >= 1; i *= 5) {
+			count += n / i;
+		}
+
+		return count;
 	}
 
 }

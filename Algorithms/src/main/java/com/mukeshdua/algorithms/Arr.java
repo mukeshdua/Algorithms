@@ -58,6 +58,7 @@ public class Arr {
 
 	/**
 	 * Add plus one to number of digits
+	 * 
 	 * @param digits
 	 * @return
 	 */
@@ -94,6 +95,7 @@ public class Arr {
 
 	/**
 	 * Rotate array by k
+	 * 
 	 * @param nums
 	 * @param k
 	 */
@@ -120,6 +122,7 @@ public class Arr {
 
 	/**
 	 * Contains duplicate
+	 * 
 	 * @param nums
 	 * @return
 	 */
@@ -137,6 +140,7 @@ public class Arr {
 
 	/**
 	 * Contains duplicate at most k
+	 * 
 	 * @param nums
 	 * @param k
 	 * @return
@@ -157,6 +161,7 @@ public class Arr {
 
 	/**
 	 * Majority Element
+	 * 
 	 * @param nums
 	 * @return
 	 */
@@ -184,4 +189,5 @@ public class Arr {
 
 	}
 
+	
 }
