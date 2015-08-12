@@ -6,8 +6,10 @@ import java.util.List;
 
 public class Arr {
 
-	// Generate pascal tree
-	public List<List<Integer>> generate(int num) {
+	/**
+	 * Generate pascal tree
+	 */
+	public static List<List<Integer>> generate(int num) {
 		List<List<Integer>> pascals = new ArrayList<List<Integer>>(num);
 		if (num < 1) {
 			return pascals;
@@ -29,7 +31,9 @@ public class Arr {
 		return pascals;
 	}
 
-	// Given an index k, return the kth row of the Pascal's triangle.
+	/**
+	 * Given an index k, return the kth row of the Pascal's triangle.
+	 */
 	public static List<Integer> getRow(int k) {
 		List<List<Integer>> pascals = new ArrayList<List<Integer>>(k);
 		List<Integer> prev = new ArrayList<Integer>();
@@ -52,8 +56,12 @@ public class Arr {
 		return pascals.get(k);
 	}
 
-	// Add plus one to number of digits
-	public int[] plusOne(int[] digits) {
+	/**
+	 * Add plus one to number of digits
+	 * @param digits
+	 * @return
+	 */
+	public static int[] plusOne(int[] digits) {
 		int carriage = 0;
 
 		for (int count = digits.length - 1; count >= 0; count--) {
@@ -84,8 +92,12 @@ public class Arr {
 		return retDigits;
 	}
 
-	// Rotate array
-	public void rotate(int[] nums, int k) {
+	/**
+	 * Rotate array by k
+	 * @param nums
+	 * @param k
+	 */
+	public static void rotate(int[] nums, int k) {
 		if (k > nums.length) {
 			k = k % nums.length;
 		}
@@ -106,8 +118,12 @@ public class Arr {
 		}
 	}
 
-	// Contains duplicate
-	public boolean containsDuplicate(int[] nums) {
+	/**
+	 * Contains duplicate
+	 * @param nums
+	 * @return
+	 */
+	public static boolean containsDuplicate(int[] nums) {
 		HashMap<Integer, Integer> numMap = new HashMap<Integer, Integer>();
 		for (int num : nums) {
 			if (numMap.containsKey(num)) {
@@ -119,8 +135,13 @@ public class Arr {
 		return false;
 	}
 
-	// Contains duplicate II
-	public boolean containsNearbyDuplicate(int[] nums, int k) {
+	/**
+	 * Contains duplicate at most k
+	 * @param nums
+	 * @param k
+	 * @return
+	 */
+	public static boolean containsNearbyDuplicate(int[] nums, int k) {
 		HashMap<Integer, Integer> numMap = new HashMap<Integer, Integer>();
 		for (int count = 0; count < nums.length; count++) {
 			int num = nums[count];
@@ -134,8 +155,12 @@ public class Arr {
 
 	}
 
-	// Majority Element
-	public int majorityElement(int[] nums) {
+	/**
+	 * Majority Element
+	 * @param nums
+	 * @return
+	 */
+	public static int majorityElement(int[] nums) {
 		HashMap<Integer, Integer> numMap = new HashMap<Integer, Integer>();
 		for (int num : nums) {
 			if (numMap.containsKey(num)) {

@@ -64,7 +64,7 @@ public class Str {
 	}
 
 	// Length of last word in a string
-	public int lengthOfLastWord(String s) {
+	public static int lengthOfLastWord(String s) {
 		if (s == null || s.trim().equals("")) {
 			return 0;
 		}
@@ -114,7 +114,7 @@ public class Str {
 	/*
 	 * Given a sorted integer array without duplicates, return the summary of its ranges. For example, given [0,1,2,4,5,7], return ["0->2","4->5","7"].
 	 */
-	public List<String> summaryRanges(int[] nums) {
+	public static List<String> summaryRanges(int[] nums) {
 		List<String> result = new ArrayList<String>();
 
 		if (nums == null || nums.length == 0)

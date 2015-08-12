@@ -34,7 +34,7 @@ public class LinkList {
 	}
 
 	// Reverse the link list
-	public ListNode reverseList(ListNode head) {
+	public static ListNode reverseList(ListNode head) {
 		ListNode reverseHead = null;
 		ListNode current = head;
 		while (current != null) {

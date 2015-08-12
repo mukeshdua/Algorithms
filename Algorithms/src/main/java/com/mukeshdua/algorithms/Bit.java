@@ -2,7 +2,9 @@ package com.mukeshdua.algorithms;
 
 public class Bit {
 
-	// Reverse bits of a given 32 bits unsigned integer.
+	/**
+	 * Reverse bits of a given 32 bits unsigned integer.
+	 */
 	public static int reverseBits(int in) {
 		int out = 0;
 		for (int ii = 0; ii < 32; ii++) {
@@ -14,7 +16,9 @@ public class Bit {
 
 	}
 
-	// Write a function that takes an unsigned integer and returns the number of ’1' bits it has (also known as the Hamming weight).
+	/**
+	 * Write a function that takes an unsigned integer and returns the number of ’1' bits it has (also known as the Hamming weight).
+	 */
 	public static int hammingWeight(int x) {
 		int total_ones = 0;
 		while (x != 0) {

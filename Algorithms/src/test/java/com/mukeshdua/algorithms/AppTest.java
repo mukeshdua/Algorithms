@@ -1,4 +1,4 @@
-package com.mukeshdua.Algorithms;
+package com.mukeshdua.algorithms;
 
 import junit.framework.Test;
 import junit.framework.TestCase;

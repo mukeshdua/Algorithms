@@ -16,7 +16,7 @@ public class Tree {
 	}
 
 	// Convert sorted array to Tree
-	public TreeNode sortedArrayToBST(int[] num, int start, int end) {
+	public static TreeNode sortedArrayToBST(int[] num, int start, int end) {
 		if (start > end)
 			return null;
 
@@ -29,7 +29,7 @@ public class Tree {
 	}
 
 	// Print pre-order
-	void preOrder(TreeNode root) {
+	public static void preOrder(TreeNode root) {
 
 		if (root == null)
 			return;
@@ -42,7 +42,7 @@ public class Tree {
 	}
 
 	// print inorder
-	void inOrder(TreeNode root) {
+	public static void inOrder(TreeNode root) {
 
 		if (root == null)
 			return;
@@ -54,7 +54,7 @@ public class Tree {
 	}
 
 	// Print postOrder
-	void postOrder(TreeNode root) {
+	public static void postOrder(TreeNode root) {
 
 		if (root == null)
 			return;
@@ -66,7 +66,7 @@ public class Tree {
 	}
 
 	// Given a binary tree, return the level order traversal of its nodes' values. (ie, from left to right, level by level).
-	public List<List<Integer>> levelOrder(TreeNode root) {
+	public static List<List<Integer>> levelOrder(TreeNode root) {
 		List<List<Integer>> retValues = new ArrayList<List<Integer>>();
 		if (root == null) {
 			return retValues;
@@ -101,7 +101,7 @@ public class Tree {
 	}
 
 	// Given a binary tree, return the level order traversal of its nodes' values. (ie, from left to right, level by level).BOTTOM UP
-	public List<List<Integer>> levelOrderBottom(TreeNode root) {
+	public static List<List<Integer>> levelOrderBottom(TreeNode root) {
 		List<List<Integer>> retValues = new ArrayList<List<Integer>>();
 		if (root == null) {
 			return retValues;
@@ -141,7 +141,7 @@ public class Tree {
 	}
 
 	// InvertTree
-	public TreeNode invertTree(TreeNode root) {
+	public static TreeNode invertTree(TreeNode root) {
 		LinkedList<TreeNode> queue = new LinkedList<TreeNode>();
 
 		if (root != null) {
@@ -164,7 +164,7 @@ public class Tree {
 	}
 
 	// Check if 2 BSTs are same
-	public boolean isSameTree(TreeNode p, TreeNode q) {
+	public static boolean isSameTree(TreeNode p, TreeNode q) {
 		if (p == null && q == null) {
 			return true;
 		} else if ((p != null && q == null) || (p == null && q != null)) {
@@ -176,7 +176,7 @@ public class Tree {
 	}
 
 	// Lowest common Ancestor
-	public TreeNode lowestCommonAncestor(TreeNode root, TreeNode p, TreeNode q) {
+	public static TreeNode lowestCommonAncestor(TreeNode root, TreeNode p, TreeNode q) {
 		if (root == null || p == null || q == null) {
 			return null;
 		}

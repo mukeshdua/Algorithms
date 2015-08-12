@@ -81,7 +81,7 @@ public class Number {
 	}
 
 	// Reverse integer
-	public int reverse(int num) {
+	public static int reverse(int num) {
 		long reverse = 0;
 		while (num != 0) {
 			reverse = reverse * 10 + num % 10;
@@ -94,7 +94,7 @@ public class Number {
 	}
 	
 	//Is particular number of two
-	public boolean isPowerOfTwo(int n) {
+	public static boolean isPowerOfTwo(int n) {
 		if (n <= 0) {
 			return false;
 		}
