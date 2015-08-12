@@ -29,5 +29,40 @@ public class Number {
 		}
 		return false;
 	}
+	
+	//Is particular number prime
+	public static Boolean isNumberPrime(int number) {
+		if (number == 2) {
+			return true;
+		}
+		if (number > 2 && number % 2 == 0) {
+			return false;
+		}
+		int top = (int) (Math.sqrt(number)) + 1;
+		for (int count = 3; count < top; count += 2) {
+			if (number % count == 0) {
+				return false;
+			}
+		}
+		return true;
+	}
+	
+	//Count number of primes
+	public static int countPrimes(int number) {
+	    if(number <= 2)
+		{
+			return 0;
+		}
+		int primeCount=1;
+		for(int count=3;count<number;count+=2)
+		{
+			if(isNumberPrime(count))
+			{
+				primeCount++;
+			}
+		}
+		return primeCount;
+		
+	}
 
 }
