@@ -29,8 +29,8 @@ public class Number {
 		}
 		return false;
 	}
-	
-	//Is particular number prime
+
+	// Is particular number prime
 	public static Boolean isNumberPrime(int number) {
 		if (number == 2) {
 			return true;
@@ -46,23 +46,60 @@ public class Number {
 		}
 		return true;
 	}
-	
-	//Count number of primes
+
+	// Count number of primes
 	public static int countPrimes(int number) {
-	    if(number <= 2)
-		{
+		if (number <= 2) {
 			return 0;
 		}
-		int primeCount=1;
-		for(int count=3;count<number;count+=2)
-		{
-			if(isNumberPrime(count))
-			{
+		int primeCount = 1;
+		for (int count = 3; count < number; count += 2) {
+			if (isNumberPrime(count)) {
 				primeCount++;
 			}
 		}
 		return primeCount;
-		
+
+	}
+
+	// Palindrome number
+	public static boolean isPalindrome(int num) {
+		if (num < 0) {
+			return false;
+		}
+		int original = num;
+		int reverse = 0;
+		while (num != 0) {
+			int remainder = num % 10;
+			reverse = reverse * 10 + remainder;
+			num = num / 10;
+		}
+		if (reverse == original) {
+			return true;
+		}
+		return false;
+	}
+
+	// Reverse integer
+	public int reverse(int num) {
+		long reverse = 0;
+		while (num != 0) {
+			reverse = reverse * 10 + num % 10;
+			num = num / 10;
+		}
+		if (reverse > Integer.MAX_VALUE || reverse < Integer.MIN_VALUE) {
+			reverse = 0;
+		}
+		return (int) reverse;
+	}
+	
+	//Is particular number of two
+	public boolean isPowerOfTwo(int n) {
+		if (n <= 0) {
+			return false;
+		}
+		return (n & (n - 1)) == 0;
+
 	}
 
 }

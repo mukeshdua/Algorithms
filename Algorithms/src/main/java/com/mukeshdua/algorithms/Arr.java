@@ -1,6 +1,7 @@
 package com.mukeshdua.algorithms;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 public class Arr {
@@ -50,19 +51,18 @@ public class Arr {
 		}
 		return pascals.get(k);
 	}
-	
-	//Add plus one to number of digits
+
+	// Add plus one to number of digits
 	public int[] plusOne(int[] digits) {
-        int carriage = 0;
-		
+		int carriage = 0;
+
 		for (int count = digits.length - 1; count >= 0; count--) {
 			int temp = 0;
-			int carraigeDigit =digits[count]+carriage;
-			if(count == digits.length-1 )
-			{
+			int carraigeDigit = digits[count] + carriage;
+			if (count == digits.length - 1) {
 				carraigeDigit++;
 			}
-			carriage=0;
+			carriage = 0;
 			if (carraigeDigit > 9) {
 				temp = 10;
 				carriage = 1;
@@ -73,16 +73,90 @@ public class Arr {
 			}
 
 		}
-		if(carriage==0)
-		{
+		if (carriage == 0) {
 			return digits;
 		}
-		int[] retDigits= new int[digits.length +1];
+		int[] retDigits = new int[digits.length + 1];
 		for (int count = digits.length - 1; count >= 0; count--) {
-			retDigits[count + 1]=digits[count];
+			retDigits[count + 1] = digits[count];
 		}
-		retDigits[0]=carriage;
+		retDigits[0] = carriage;
 		return retDigits;
-    }
+	}
+
+	// Rotate array
+	public void rotate(int[] nums, int k) {
+		if (k > nums.length) {
+			k = k % nums.length;
+		}
+		HashMap<Integer, Integer> expectedPosition = new HashMap<Integer, Integer>();
+		for (int count = 0; count < nums.length; count++) {
+			int key = -1;
+			if (count + k >= nums.length) {
+				key = k + count - nums.length;
+			} else {
+				key = count + k;
+			}
+			expectedPosition.put(key, nums[count]);
+		}
+		for (int count = 0; count < nums.length; count++) {
+			if (expectedPosition.containsKey(count)) {
+				nums[count] = expectedPosition.get(count);
+			}
+		}
+	}
+
+	// Contains duplicate
+	public boolean containsDuplicate(int[] nums) {
+		HashMap<Integer, Integer> numMap = new HashMap<Integer, Integer>();
+		for (int num : nums) {
+			if (numMap.containsKey(num)) {
+				return true;
+			} else {
+				numMap.put(num, 1);
+			}
+		}
+		return false;
+	}
+
+	// Contains duplicate II
+	public boolean containsNearbyDuplicate(int[] nums, int k) {
+		HashMap<Integer, Integer> numMap = new HashMap<Integer, Integer>();
+		for (int count = 0; count < nums.length; count++) {
+			int num = nums[count];
+			if (numMap.containsKey(num) && count - numMap.get(num) <= k) {
+				return true;
+			} else {
+				numMap.put(num, count);
+			}
+		}
+		return false;
+
+	}
+
+	// Majority Element
+	public int majorityElement(int[] nums) {
+		HashMap<Integer, Integer> numMap = new HashMap<Integer, Integer>();
+		for (int num : nums) {
+			if (numMap.containsKey(num)) {
+				int value = numMap.get(num) + 1;
+				numMap.put(num, value);
+			} else {
+				numMap.put(num, 1);
+			}
+		}
+
+		int majoritynum = -1;
+		int majoritynumCount = 0;
+		for (Integer key : numMap.keySet()) {
+			if (numMap.get(key) > majoritynumCount) {
+				majoritynumCount = numMap.get(key);
+				majoritynum = key;
+			}
+		}
+
+		return majoritynum;
+
+	}
 
 }
