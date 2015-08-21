@@ -15,7 +15,13 @@ public class Tree {
 
 	}
 
-	// Convert sorted array to Tree
+	/**
+	 * Convert sorted array to Tree
+	 * @param num
+	 * @param start
+	 * @param end
+	 * @return
+	 */
 	public static TreeNode sortedArrayToBST(int[] num, int start, int end) {
 		if (start > end)
 			return null;
@@ -28,7 +34,10 @@ public class Tree {
 		return root;
 	}
 
-	// Print pre-order
+	/**
+	 *  Print pre-order
+	 * @param root
+	 */
 	public static void preOrder(TreeNode root) {
 
 		if (root == null)
@@ -41,7 +50,10 @@ public class Tree {
 
 	}
 
-	// print inorder
+	/**
+	 * print inorder
+	 * @param root
+	 */
 	public static void inOrder(TreeNode root) {
 
 		if (root == null)
@@ -53,7 +65,10 @@ public class Tree {
 
 	}
 
-	// Print postOrder
+	/**
+	 * Print postOrder
+	 * @param root
+	 */
 	public static void postOrder(TreeNode root) {
 
 		if (root == null)
@@ -65,7 +80,11 @@ public class Tree {
 
 	}
 
-	// Given a binary tree, return the level order traversal of its nodes' values. (ie, from left to right, level by level).
+	/**
+	 * Given a binary tree, return the level order traversal of its nodes' values. (ie, from left to right, level by level).
+	 * @param root
+	 * @return
+	 */
 	public static List<List<Integer>> levelOrder(TreeNode root) {
 		List<List<Integer>> retValues = new ArrayList<List<Integer>>();
 		if (root == null) {
@@ -100,7 +119,11 @@ public class Tree {
 		return retValues;
 	}
 
-	// Given a binary tree, return the level order traversal of its nodes' values. (ie, from left to right, level by level).BOTTOM UP
+	/**
+	 * Given a binary tree, return the level order traversal of its nodes' values. (ie, from left to right, level by level).BOTTOM UP
+	 * @param root
+	 * @return
+	 */
 	public static List<List<Integer>> levelOrderBottom(TreeNode root) {
 		List<List<Integer>> retValues = new ArrayList<List<Integer>>();
 		if (root == null) {
@@ -140,7 +163,11 @@ public class Tree {
 		return finalRetValues;
 	}
 
-	// InvertTree
+	/**
+	 * InvertTree
+	 * @param root
+	 * @return
+	 */
 	public static TreeNode invertTree(TreeNode root) {
 		LinkedList<TreeNode> queue = new LinkedList<TreeNode>();
 
@@ -163,7 +190,12 @@ public class Tree {
 		return root;
 	}
 
-	// Check if 2 BSTs are same
+	/**
+	 * Check if 2 BSTs are same
+	 * @param p
+	 * @param q
+	 * @return
+	 */
 	public static boolean isSameTree(TreeNode p, TreeNode q) {
 		if (p == null && q == null) {
 			return true;
@@ -175,7 +207,13 @@ public class Tree {
 
 	}
 
-	// Lowest common Ancestor
+	/**
+	 * Lowest common Ancestor
+	 * @param root
+	 * @param p
+	 * @param q
+	 * @return
+	 */
 	public static TreeNode lowestCommonAncestor(TreeNode root, TreeNode p, TreeNode q) {
 		if (root == null || p == null || q == null) {
 			return null;
@@ -187,6 +225,38 @@ public class Tree {
 		} else {
 			return root;
 		}
+
+	}
+	
+   /**
+    * Return all tree nodes from top to bottom
+    * @param root
+    * @param str
+    * @return
+    */
+	public static List<String> getTreeNodes(TreeNode root, String str) {
+		if (root == null) {
+			str = "";
+			return null;
+
+		}
+		str += !str.equals("") ? "->" : "";
+		str += root.val;
+		if (root.left == null && root.right == null) {
+			List<String> result = new ArrayList();
+			result.add(str.trim());
+			return result;
+		}
+		List<String> list = new ArrayList<String>();
+		List<String> tempList = getTreeNodes(root.left, str);
+		if (tempList != null) {
+			list.addAll(tempList);
+		}
+		tempList = getTreeNodes(root.right, str);
+		if (tempList != null) {
+			list.addAll(tempList);
+		}
+		return list;
 
 	}
 

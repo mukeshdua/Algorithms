@@ -205,19 +205,52 @@ public class Str {
 				int ver1 = Integer.valueOf(version1.indexOf(".") == -1 ? version1 : version1.substring(0, version1.indexOf(".")));
 				int ver2 = Integer.valueOf(version2.indexOf(".") == -1 ? version2 : version2.substring(0, version2.indexOf(".")));
 
-				retValue= ver1 > ver2 ? 1 : (ver1 < ver2 ? -1 : 0);
-				if(retValue !=0)
-				{
+				retValue = ver1 > ver2 ? 1 : (ver1 < ver2 ? -1 : 0);
+				if (retValue != 0) {
 					return retValue;
 				}
-				version1=version1.indexOf(".") == -1 ? "0" : version1.substring(version1.indexOf(".")+1);
-				version2=version2.indexOf(".") == -1 ? "0" : version2.substring(version2.indexOf(".")+1);
-				
+				version1 = version1.indexOf(".") == -1 ? "0" : version1.substring(version1.indexOf(".") + 1);
+				version2 = version2.indexOf(".") == -1 ? "0" : version2.substring(version2.indexOf(".") + 1);
+
 			}
 			return Integer.valueOf(version1) > Integer.valueOf(version2) ? 1 : (Integer.valueOf(version1) < Integer.valueOf(version2) ? -1 : 0);
 
 		}
 		return retValue;
+	}
+
+	private static String removeNonAlphanumeric(String s) {
+		StringBuilder str = new StringBuilder();
+		for (int count = 0; count < s.length(); count++) {
+			if (String.valueOf(s.charAt(count)).matches("^[a-zA-Z0-9]*$")) {
+				str.append(s.charAt(count));
+			}
+
+		}
+
+		return str.toString();
+
+	}
+
+	public static boolean isPalindrome(String s) {
+		String nonAlphaNumeric = removeNonAlphanumeric(s);
+		if(nonAlphaNumeric.length() <= 1)
+		{
+			return true;
+		}
+		int start = 0;
+		int end = nonAlphaNumeric.length() - 1;
+
+		while (start < end) {
+			if (!String.valueOf(nonAlphaNumeric.charAt(start)).equalsIgnoreCase(String.valueOf(nonAlphaNumeric.charAt(end)))) {
+				return false;
+			}
+			start++;
+			end--;
+		}
+
+		return true;
+
 	}
 
 }

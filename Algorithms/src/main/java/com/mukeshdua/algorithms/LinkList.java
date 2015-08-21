@@ -14,7 +14,11 @@ public class LinkList {
 
 	}
 
-	// Check if linked list is palindrome
+	/**
+	 * Check if linked list is palindrome
+	 * @param head
+	 * @return
+	 */
 	public static boolean isPalindrome(ListNode head) {
 		if (head == null || head.next == null) {
 			return true;
@@ -33,7 +37,11 @@ public class LinkList {
 		return true;
 	}
 
-	// Reverse the link list
+	/**
+	 * Reverse the link list
+	 * @param head
+	 * @return
+	 */
 	public static ListNode reverseList(ListNode head) {
 		ListNode reverseHead = null;
 		ListNode current = head;

@@ -189,5 +189,58 @@ public class Arr {
 
 	}
 
+	/**
+	 * Search an element in 2D array
+	 * @param matrix
+	 * @param target
+	 * @return
+	 */
 	
+	public static boolean searchMatrix(int[][] matrix, int target) {
+		if (matrix == null || matrix.length == 0 || matrix[0].length == 0)
+			return false;
+
+		int row = matrix.length;
+		int col = matrix[0].length;
+		int rowPtr = row - 1;
+		int colPtr = 0;
+
+		while (true) {
+
+			// ending loop condition
+			if (rowPtr < 0 || colPtr >= col)
+				return false;
+
+			if (matrix[rowPtr][colPtr] == target)
+				return true;
+
+			if (matrix[rowPtr][colPtr] > target) {
+				rowPtr--;
+
+			} else {
+				colPtr++;
+			}
+
+		}
+
+	}
+
+//	public static int[] twoSum(int[] nums, int target) {
+//		int[] retIndexes=new int[2];
+//		HashMap<Integer,Integer> values= new HashMap<Integer,Integer>(nums.length);
+//		for(int count=0;count< nums.length;count++)
+//		{
+//			values.put(count,nums[count]);
+//		}
+//		for(int val:nums)
+//		{
+//			int expectedVal=target-val;
+//			if(values.containsValue(expectedVal))
+//			{
+//				retIndexes[]
+//			}
+//		}
+//		return retIndexes;
+//	}
+
 }
