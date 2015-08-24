@@ -15,8 +15,16 @@ public class Tree {
 
 	}
 
+	public static TreeNode sortedArrayToBST(int[] arr) {
+		if (arr.length == 0)
+			return null;
+		return sortedArrayToBST(arr, 0, arr.length - 1);
+
+	}
+
 	/**
 	 * Convert sorted array to Tree
+	 * 
 	 * @param num
 	 * @param start
 	 * @param end
@@ -35,7 +43,8 @@ public class Tree {
 	}
 
 	/**
-	 *  Print pre-order
+	 * Print pre-order
+	 * 
 	 * @param root
 	 */
 	public static void preOrder(TreeNode root) {
@@ -52,6 +61,7 @@ public class Tree {
 
 	/**
 	 * print inorder
+	 * 
 	 * @param root
 	 */
 	public static void inOrder(TreeNode root) {
@@ -67,6 +77,7 @@ public class Tree {
 
 	/**
 	 * Print postOrder
+	 * 
 	 * @param root
 	 */
 	public static void postOrder(TreeNode root) {
@@ -82,6 +93,7 @@ public class Tree {
 
 	/**
 	 * Given a binary tree, return the level order traversal of its nodes' values. (ie, from left to right, level by level).
+	 * 
 	 * @param root
 	 * @return
 	 */
@@ -121,6 +133,7 @@ public class Tree {
 
 	/**
 	 * Given a binary tree, return the level order traversal of its nodes' values. (ie, from left to right, level by level).BOTTOM UP
+	 * 
 	 * @param root
 	 * @return
 	 */
@@ -165,6 +178,7 @@ public class Tree {
 
 	/**
 	 * InvertTree
+	 * 
 	 * @param root
 	 * @return
 	 */
@@ -192,6 +206,7 @@ public class Tree {
 
 	/**
 	 * Check if 2 BSTs are same
+	 * 
 	 * @param p
 	 * @param q
 	 * @return
@@ -209,6 +224,7 @@ public class Tree {
 
 	/**
 	 * Lowest common Ancestor
+	 * 
 	 * @param root
 	 * @param p
 	 * @param q
@@ -227,13 +243,14 @@ public class Tree {
 		}
 
 	}
-	
-   /**
-    * Return all tree nodes from top to bottom
-    * @param root
-    * @param str
-    * @return
-    */
+
+	/**
+	 * Return all tree nodes from top to bottom
+	 * 
+	 * @param root
+	 * @param str
+	 * @return
+	 */
 	public static List<String> getTreeNodes(TreeNode root, String str) {
 		if (root == null) {
 			str = "";
@@ -257,6 +274,64 @@ public class Tree {
 			list.addAll(tempList);
 		}
 		return list;
+
+	}
+
+	/***
+	 * Check if 2 trees are Symmetric
+	 * 
+	 * @param root
+	 * @return
+	 */
+	public static boolean isSymmetric(TreeNode root) {
+		if (root == null) {
+			return true;
+		}
+		return isSymmetric(root.left, root.right);
+	}
+
+	private static boolean isSymmetric(TreeNode left, TreeNode right) {
+		if (left == null || right == null) {
+			return left == null && right == null;
+		}
+		return left.val == right.val && isSymmetric(left.left, right.right) && isSymmetric(left.right, right.left);
+	}
+
+	/**
+	 * Max Depth
+	 * 
+	 * @param root
+	 * @return
+	 */
+	public static int maxDepth(TreeNode root) {
+		if (root == null) {
+			return 0;
+		}
+		if(root.val == -1)
+		{
+			return -1;
+		}
+		int maxLeft = maxDepth(root.left);
+		int maxRight = maxDepth(root.right);
+		return maxLeft > maxRight ? maxLeft + 1 : maxRight + 1;
+	}
+
+	public static boolean isBalanced(TreeNode root) {
+		if (root == null) {
+			return true;
+		}
+		int maxLeft = maxDepth(root.left);
+		int maxRight = maxDepth(root.right);
+		
+		if((maxLeft > maxRight && maxLeft-maxRight >1) || maxLeft < maxRight && maxRight-maxLeft >1)
+		{
+			return false;
+		}
+		else
+		{
+			return true;
+		}
+		
 
 	}
 

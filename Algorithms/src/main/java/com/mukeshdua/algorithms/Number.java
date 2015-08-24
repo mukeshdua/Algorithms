@@ -1,6 +1,7 @@
 package com.mukeshdua.algorithms;
 
 import java.util.HashSet;
+import java.util.List;
 
 public class Number {
 
@@ -19,6 +20,7 @@ public class Number {
 
 	/**
 	 * Write an algorithm to determine if a number is "happy".
+	 * 
 	 * @param number
 	 * @return
 	 */
@@ -36,6 +38,7 @@ public class Number {
 
 	/**
 	 * Is particular number prime
+	 * 
 	 * @param number
 	 * @return
 	 */
@@ -57,6 +60,7 @@ public class Number {
 
 	/**
 	 * Count number of primes
+	 * 
 	 * @param number
 	 * @return
 	 */
@@ -76,6 +80,7 @@ public class Number {
 
 	/**
 	 * Palindrome number
+	 * 
 	 * @param num
 	 * @return
 	 */
@@ -98,6 +103,7 @@ public class Number {
 
 	/**
 	 * Reverse integer
+	 * 
 	 * @param num
 	 * @return
 	 */
@@ -115,6 +121,7 @@ public class Number {
 
 	/**
 	 * Is particular number of two
+	 * 
 	 * @param n
 	 * @return
 	 */
@@ -139,6 +146,48 @@ public class Number {
 		}
 
 		return count;
+	}
+
+	/**
+	 * Sum Digit until sum is not less than 0
+	 * 
+	 * @param num
+	 * @return
+	 */
+	public static int sumDigit(int num) {
+		int sum = 0;
+		while (num != 0) {
+			sum = sum + num % 10;
+			num = num / 10;
+			if (num == 0 && sum >= 10) {
+				num = sum;
+				sum = 0;
+			}
+		}
+		return sum;
+	}
+
+	/**
+	 * You are climbing a stair case. It takes n steps to reach to the top. Each time you can either climb 1 or 2 steps. In how many distinct ways can you climb
+	 * to the top?
+	 */
+	public int climbStairs(int n) {
+		if (n < 4)
+			return n;
+		int a = 2, b = 3, c = 5;
+		for (int i = 5; i <= n; i++) {
+			a = c;
+			c = b + c;
+			b = a;
+		}
+		return c;
+
+	}
+
+	public int minimumTotal(List<List<Integer>> triangle) {
+		
+		return 0;
+
 	}
 
 }
