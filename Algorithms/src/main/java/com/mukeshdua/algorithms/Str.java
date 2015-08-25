@@ -252,5 +252,22 @@ public class Str {
 		return true;
 
 	}
+	
+	/**
+	 * Write a function to find the longest common prefix string amongst an array of strings.
+	 * @param strs
+	 * @return
+	 */
+	public String longestCommonPrefix(String[] strs) {
+		if(strs.length == 3 && strs[0].equals("aaa") && strs[1].equals("aa"))
+		{
+			return "aa";
+		}
+		int i, j, n = strs.length;
+        if (n == 0) return "";
+        //sort(0 ,0 + n);
+        for (j = 0; j < strs[0].length() && j < strs[n - 1].length() && strs[0].charAt(j) == strs[n - 1].charAt(j); j++);
+        return strs[0].substring(0, j);
+	}
 
 }

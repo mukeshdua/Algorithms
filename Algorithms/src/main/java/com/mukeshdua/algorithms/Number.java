@@ -1,7 +1,9 @@
 package com.mukeshdua.algorithms;
 
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 
 public class Number {
 
@@ -183,11 +185,38 @@ public class Number {
 		return c;
 
 	}
-
-	public int minimumTotal(List<List<Integer>> triangle) {
-		
-		return 0;
-
-	}
+	
+//	public String countAndSay(int n)
+//	{
+//		Map<Integer,String> val= new HashMap<Integer,String>();
+//		Map<Integer,Integer> storeVal= new HashMap<Integer, Integer>();
+//		val.put(0,"Zero");
+//		
+//		while(n >=0)
+//		{
+//			int digit= n%10;
+//			if(storeVal.containsKey(digit))
+//			{
+//				storeVal.put(digit, storeVal.get(digit) + 1);
+//			}
+//			else
+//			{
+//				storeVal.put(digit, 1);
+//			}
+//			n=n/10;
+//		}
+//		for(Integer key:storeVal.keySet())
+//		{
+//			
+//		}
+//	}
+//
+//	public int minimumTotal(List<List<Integer>> triangle) {
+//
+//		return 0;
+//
+//	}
+	
+	
 
 }
