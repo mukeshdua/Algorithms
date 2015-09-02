@@ -9,8 +9,8 @@ public class Tree {
 	TreeNode	root;
 
 	Tree(int[] arr) throws Exception {
-		if (arr.length == 0)
-			throw new Exception("Arraylength is 0");
+		// if (arr.length == 0)
+		// throw new Exception("Arraylength is 0");
 		root = sortedArrayToBST(arr, 0, arr.length - 1);
 
 	}
@@ -244,6 +244,45 @@ public class Tree {
 
 	}
 
+	private int getHeightLeft(TreeNode root) {
+		if (root == null) {
+			return 0;
+		}
+		return getHeightLeft(root.left) + 1;
+
+	}
+
+	private int getHeightRight(TreeNode root) {
+		if (root == null) {
+			return 0;
+		}
+		return getHeightRight(root.right) + 1;
+
+	}
+
+	/**
+	 * Given a complete binary tree, count the number of nodes.
+	 * 
+	 * Definition of a complete binary tree from Wikipedia: In a complete binary tree every level, except possibly the last, is completely filled, and all nodes
+	 * in the last level are as far left as possible. It can have between 1 and 2h nodes inclusive at the last level h.
+	 * 
+	 * @param root
+	 * @return
+	 */
+	public int countNodes(TreeNode root) {
+
+		if (root == null) {
+			return 0;
+		}
+		int leftHeight = getHeightLeft(root.left);
+		int rightHeight = getHeightRight(root.right);
+		if (leftHeight == rightHeight) {
+			return (2 << (leftHeight)) - 1;
+		} else {
+			return countNodes(root.left) + countNodes(root.right) + 1;
+		}
+	}
+
 	/**
 	 * Return all tree nodes from top to bottom
 	 * 
@@ -307,8 +346,7 @@ public class Tree {
 		if (root == null) {
 			return 0;
 		}
-		if(root.val == -1)
-		{
+		if (root.val == -1) {
 			return -1;
 		}
 		int maxLeft = maxDepth(root.left);
@@ -316,22 +354,49 @@ public class Tree {
 		return maxLeft > maxRight ? maxLeft + 1 : maxRight + 1;
 	}
 
+	/**
+	 * isTreeBalanced
+	 * 
+	 * @param root
+	 * @return
+	 */
 	public static boolean isBalanced(TreeNode root) {
 		if (root == null) {
 			return true;
 		}
 		int maxLeft = maxDepth(root.left);
 		int maxRight = maxDepth(root.right);
-		
-		if((maxLeft > maxRight && maxLeft-maxRight >1) || maxLeft < maxRight && maxRight-maxLeft >1)
-		{
+
+		if ((maxLeft > maxRight && maxLeft - maxRight > 1) || maxLeft < maxRight && maxRight - maxLeft > 1) {
 			return false;
-		}
-		else
-		{
+		} else {
 			return true;
 		}
-		
+
+	}
+
+	/**
+	 * Given a binary tree and a sum, determine if the tree has a root-to-leaf path such that adding up all the values along the path equals the given sum.
+	 * 
+	 * @param root
+	 * @param str
+	 * @return
+	 */
+	public static boolean hasPathSum(TreeNode root, int sum) {
+		if (root == null) {
+			return false;
+		}
+		sum = sum - root.val;
+		if (root.left == null && root.right == null) {
+			if (sum == 0) {
+				return true;
+			} else {
+				return false;
+			}
+		}
+		boolean left = hasPathSum(root.left, sum);
+		boolean right = hasPathSum(root.right, sum);
+		return left || right;
 
 	}
 

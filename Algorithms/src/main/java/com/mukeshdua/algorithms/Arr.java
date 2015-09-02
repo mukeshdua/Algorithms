@@ -191,11 +191,12 @@ public class Arr {
 
 	/**
 	 * Search an element in 2D array
+	 * 
 	 * @param matrix
 	 * @param target
 	 * @return
 	 */
-	
+
 	public static boolean searchMatrix(int[][] matrix, int target) {
 		if (matrix == null || matrix.length == 0 || matrix[0].length == 0)
 			return false;
@@ -225,22 +226,223 @@ public class Arr {
 
 	}
 
-//	public static int[] twoSum(int[] nums, int target) {
-//		int[] retIndexes=new int[2];
-//		HashMap<Integer,Integer> values= new HashMap<Integer,Integer>(nums.length);
-//		for(int count=0;count< nums.length;count++)
-//		{
-//			values.put(count,nums[count]);
-//		}
-//		for(int val:nums)
-//		{
-//			int expectedVal=target-val;
-//			if(values.containsValue(expectedVal))
-//			{
-//				retIndexes[]
-//			}
-//		}
-//		return retIndexes;
-//	}
+	public static int[] twoSum(int[] nums, int target) {
+		int[] retIndexes = new int[2];
+		HashMap<Integer, Integer> values = new HashMap<Integer, Integer>(nums.length);
+		for (int count = 0; count < nums.length; count++) {
+			values.put(nums[count], count);
+		}
+		for (int count = 0; count < nums.length; count++) {
+			int diff = target - nums[count];
+			if (values.containsKey(diff) && values.get(diff) != count) {
+				retIndexes[0] = count + 1;
+				retIndexes[1] = values.get(diff) + 1;
+				return retIndexes;
+			}
+		}
+		return retIndexes;
+	}
 
+	/**
+	 * MinSubArray length whose sum is equal to targetSum
+	 * 
+	 * @param nums
+	 * @param targetSum
+	 * @return
+	 */
+
+	public boolean isSubArraySum(int[] nums, int targetSum) {
+		if (nums.length == 0) {
+			return false;
+		}
+		if (nums.length == 1 && nums[0] == targetSum) {
+			return true;
+		}
+
+		int currSum = nums[0];
+		int start = 0;
+		for (int count = 1; count <= nums.length; count++) {
+
+			while (currSum > targetSum) {
+				currSum = currSum - nums[start];
+				start++;
+			}
+
+			if (currSum == targetSum) {
+				return true;
+			}
+			if (count < nums.length) {
+				currSum += nums[count];
+			}
+
+		}
+		return false;
+	}
+
+	/**
+	 * MinSubArray length whose sum is greater than and equal to targetSum
+	 * 
+	 * @param targetSum
+	 * @param nums
+	 * @return
+	 */
+	public static int minSubArrayLen(int targetSum, int[] nums) {
+		if (nums.length == 0) {
+			return 0;
+		}
+		if (nums.length == 1 && nums[0] >= targetSum) {
+			return 1;
+		}
+
+		int currSum = nums[0];
+		int start = 0;
+		int minLength = Integer.MAX_VALUE;
+		for (int count = 1; count <= nums.length; count++) {
+
+			while (currSum >= targetSum) {
+				currSum = currSum - nums[start];
+				if (currSum < targetSum && count - start < minLength) {
+					minLength = count - start;
+				}
+				start++;
+			}
+			if (count < nums.length) {
+				currSum += nums[count];
+			}
+		}
+		if (minLength == Integer.MAX_VALUE) {
+			return 0;
+		}
+		return minLength;
+	}
+
+	/**
+	 * Find minimum in rotated sorted array
+	 */
+	public static int findMin(int[] nums) {
+		return findMinRotatedSortedArray(nums, 0, nums.length - 1);
+
+	}
+
+	private static int findMinRotatedSortedArray(int[] nums, int left, int right) {
+		if (left == right) {
+			return nums[left];
+		}
+		if (right - left == 1) {
+			return Math.min(nums[left], nums[right]);
+		}
+		if (nums[left] < nums[right]) {
+			return nums[left];
+		}
+		int mid = left + (right - left) / 2;
+		if (nums[left] < nums[mid]) {
+			return findMinRotatedSortedArray(nums, mid, right);
+		} else {
+			return findMinRotatedSortedArray(nums, left, mid);
+		}
+
+	}
+	
+	/**
+	 * Find minimum in rotated sorted array in duplicate
+	 */
+	public static int findMinSortedDuplicateArray(int[] nums) {
+		return findMinRotatedSortedDuplicateArray(nums, 0, nums.length - 1);
+
+	}
+
+	private static int findMinRotatedSortedDuplicateArray(int[] nums, int left, int right) {
+		if (left == right) {
+			return nums[left];
+		}
+		if (right - left == 1) {
+			return Math.min(nums[left], nums[right]);
+		}
+		if (nums[left] < nums[right]) {
+			return nums[left];
+		}
+		int mid = left + (right - left) / 2;
+		if(nums[left] == nums[right])
+		{
+			return findMinRotatedSortedDuplicateArray(nums, left+1, right);
+		}
+		if (nums[left] <= nums[mid]) {
+			return findMinRotatedSortedDuplicateArray(nums, mid, right);
+		} else {
+			return findMinRotatedSortedDuplicateArray(nums, left, mid);
+		}
+
+	}
+
+	/**
+	 * Search an element in rotated sorted array
+	 */
+	public static int search(int[] nums, int target) {
+		return searchRotatedArray(nums, 0, nums.length - 1, target);
+
+	}
+
+	private static int searchRotatedArray(int[] nums, int left, int right, int target) {
+		 if(left>right) 
+		        return -1;
+		 
+		int mid = left + (right - left) / 2;
+		if (target == nums[mid]) {
+			return mid;
+		}
+
+		if(nums[left] <= nums[mid]){
+	        if(nums[left]<=target && target<nums[mid]){
+	          return searchRotatedArray(nums,left, mid-1, target);
+	        }else{
+	          return  searchRotatedArray(nums, mid+1, right, target);
+	        }
+	    }else {
+	        if(nums[mid]<target&& target<=nums[right]){
+	          return  searchRotatedArray(nums,mid+1, right, target);
+	        }else{
+	          return  searchRotatedArray(nums, left, mid-1, target);
+	        }
+	    }
+
+	}
+	
+	/**
+	 * Permutation
+	 * @param num
+	 * @return
+	 */
+	public static ArrayList<ArrayList<Integer>> permute(int[] num) {
+		ArrayList<ArrayList<Integer>> result = new ArrayList<ArrayList<Integer>>();
+		permute(num, 0, result);
+		return result;
+	}
+	 
+	private static void permute(int[] num, int start, ArrayList<ArrayList<Integer>> result) {
+	 
+		if (start >= num.length) {
+			ArrayList<Integer> item = convertArrayToList(num);
+			result.add(item);
+		}
+	 
+		for (int j = start; j <= num.length - 1; j++) {
+			swap(num, start, j);
+			permute(num, start + 1, result);
+			swap(num, start, j);
+		}
+	}
+	 
+	private static ArrayList<Integer> convertArrayToList(int[] num) {
+		ArrayList<Integer> item = new ArrayList<Integer>();
+		for (int h = 0; h < num.length; h++) {
+			item.add(num[h]);
+		}
+		return item;
+	}
+	 
+	private static void swap(int[] a, int i, int j) {
+		int temp = a[i];
+		a[i] = a[j];
+		a[j] = temp;
+	}
 }

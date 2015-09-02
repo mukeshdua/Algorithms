@@ -185,38 +185,121 @@ public class Number {
 		return c;
 
 	}
-	
-//	public String countAndSay(int n)
-//	{
-//		Map<Integer,String> val= new HashMap<Integer,String>();
-//		Map<Integer,Integer> storeVal= new HashMap<Integer, Integer>();
-//		val.put(0,"Zero");
-//		
-//		while(n >=0)
-//		{
-//			int digit= n%10;
-//			if(storeVal.containsKey(digit))
-//			{
-//				storeVal.put(digit, storeVal.get(digit) + 1);
-//			}
-//			else
-//			{
-//				storeVal.put(digit, 1);
-//			}
-//			n=n/10;
-//		}
-//		for(Integer key:storeVal.keySet())
-//		{
-//			
-//		}
-//	}
-//
-//	public int minimumTotal(List<List<Integer>> triangle) {
-//
-//		return 0;
-//
-//	}
-	
-	
+
+	private static final String[]	specialNames	= { "", " thousand", " million", " billion", " trillion", " quadrillion", " quintillion" };
+
+	private static final String[]	tensNames		= { "", " ten", " twenty", " thirty", " forty", " fifty", " sixty", " seventy", " eighty", " ninety" };
+
+	private static final String[]	numNames		= { "", " one", " two", " three", " four", " five", " six", " seven", " eight", " nine", " ten", " eleven",
+			" twelve", " thirteen", " fourteen", " fifteen", " sixteen", " seventeen", " eighteen", " nineteen" };
+
+	private static String convertLessThanOneThousand(int number) {
+		String current;
+
+		if (number % 100 < 20) {
+			current = numNames[number % 100];
+			number /= 100;
+		} else {
+			current = numNames[number % 10];
+			number /= 10;
+
+			current = tensNames[number % 10] + current;
+			number /= 10;
+		}
+		if (number == 0)
+			return current;
+		return numNames[number] + " hundred" + current;
+	}
+
+	public static String convert(int number) {
+
+		if (number == 0) {
+			return "zero";
+		}
+
+		String prefix = "";
+
+		if (number < 0) {
+			number = -number;
+			prefix = "negative";
+		}
+
+		String current = "";
+		int place = 0;
+
+		do {
+			int n = number % 1000;
+			if (n != 0) {
+				String s = convertLessThanOneThousand(n);
+				current = s + specialNames[place] + current;
+			}
+			place++;
+			number /= 1000;
+		} while (number > 0);
+
+		return (prefix + current).trim();
+	}
+
+	public static int optdivide(int dividend, int divisor) {
+		if (divisor == 0)
+			return Integer.MAX_VALUE;
+		if (divisor == -1 && dividend == Integer.MIN_VALUE)
+			return Integer.MAX_VALUE;
+
+		// get positive values
+		long pDividend = Math.abs((long) dividend);
+		long pDivisor = Math.abs((long) divisor);
+		int q = 0;
+		int currentQBase = 1;
+		int currentDivisor = divisor;
+		while (dividend >= divisor) {
+			if (dividend >= currentDivisor) {
+				dividend -= currentDivisor;
+				q += currentQBase;
+				currentDivisor *= 2;
+				currentQBase *= 2;
+			} else {
+				currentDivisor /= 2;
+				currentQBase /= 2;
+			}
+		}
+		if ((dividend > 0 && divisor > 0) || (dividend < 0 && divisor < 0)) {
+			return q;
+		} else {
+			return -q;
+		}
+	}
+
+	public static int divide(int dividend, int divisor) {
+		// handle special cases
+		if (divisor == 0)
+			return Integer.MAX_VALUE;
+		if (divisor == -1 && dividend == Integer.MIN_VALUE)
+			return Integer.MAX_VALUE;
+
+		// get positive values
+		long pDividend = Math.abs((long) dividend);
+		long pDivisor = Math.abs((long) divisor);
+
+		int result = 0;
+		while (pDividend >= pDivisor) {
+			// calculate number of left shifts
+			int numShift = 0;
+			while (pDividend >= (pDivisor << numShift)) {
+				numShift++;
+			}
+
+			// dividend minus the largest shifted divisor
+			result += 1 << (numShift - 1);
+			pDividend -= (pDivisor << (numShift - 1));
+		}
+
+		if ((dividend > 0 && divisor > 0) || (dividend < 0 && divisor < 0)) {
+			return result;
+		} else {
+			return -result;
+		}
+
+	}
 
 }

@@ -234,8 +234,7 @@ public class Str {
 
 	public static boolean isPalindrome(String s) {
 		String nonAlphaNumeric = removeNonAlphanumeric(s);
-		if(nonAlphaNumeric.length() <= 1)
-		{
+		if (nonAlphaNumeric.length() <= 1) {
 			return true;
 		}
 		int start = 0;
@@ -252,22 +251,107 @@ public class Str {
 		return true;
 
 	}
-	
+
 	/**
 	 * Write a function to find the longest common prefix string amongst an array of strings.
+	 * 
 	 * @param strs
 	 * @return
 	 */
 	public String longestCommonPrefix(String[] strs) {
-		if(strs.length == 3 && strs[0].equals("aaa") && strs[1].equals("aa"))
-		{
-			return "aa";
+		if (strs == null || strs.length == 0)
+			return "";
+
+		int minLen = Integer.MAX_VALUE;
+		for (String str : strs) {
+			if (minLen > str.length())
+				minLen = str.length();
 		}
-		int i, j, n = strs.length;
-        if (n == 0) return "";
-        //sort(0 ,0 + n);
-        for (j = 0; j < strs[0].length() && j < strs[n - 1].length() && strs[0].charAt(j) == strs[n - 1].charAt(j); j++);
-        return strs[0].substring(0, j);
+		if (minLen == 0)
+			return "";
+
+		for (int j = 0; j < minLen; j++) {
+			char prev = '0';
+			for (int i = 0; i < strs.length; i++) {
+				if (i == 0) {
+					prev = strs[i].charAt(j);
+					continue;
+				}
+
+				if (strs[i].charAt(j) != prev) {
+					return strs[i].substring(0, j);
+				}
+			}
+		}
+
+		return strs[0].substring(0, minLen);
+	}
+
+	/**
+	 * '?' Matches any single character. '*' Matches any sequence of characters (including the empty sequence). The matching should cover the entire input
+	 * string (not partial). Str.isMatch("aabcsvs", "a*s*s");
+	 * 
+	 * @param s
+	 * @param p
+	 * @return
+	 */
+	public static boolean isMatch(String comStr, String wildcardStr) {
+		int comCount = 0;
+		int wdCount = 0;
+		int comIndex = -1;
+		int starIndex = -1;
+		while (comCount < comStr.length()) {
+			if (wdCount < wildcardStr.length() && (wildcardStr.charAt(wdCount) == '?' || wildcardStr.charAt(wdCount) == comStr.charAt(comCount))) {
+				comCount++;
+				wdCount++;
+			} else if (wdCount < wildcardStr.length() && wildcardStr.charAt(wdCount) == '*') {
+				comIndex = comCount;
+				starIndex = wdCount;
+				wdCount++;
+			} else if (starIndex > -1) {
+				wdCount = starIndex + 1;
+				comCount = comIndex + 1;
+				comIndex++;
+			} else {
+				return false;
+			}
+		}
+
+		while (wdCount < wildcardStr.length() && wildcardStr.charAt(wdCount) == '*') {
+			wdCount++;
+		}
+
+		return wdCount == wildcardStr.length();
+
+	}
+	
+	/**
+	 * For "ABCD" and "EACB", the LCS is "AC", return 2
+	 * @param A
+	 * @param B
+	 * @return
+	 */
+	public static int longestCommonSubsequence(String A, String B) {
+		if (A == null || A.length() == 0)
+			return 0;
+		if (B == null || B.length() == 0)
+			return 0;
+
+		int lenA = A.length();
+		int lenB = B.length();
+		int[][] lcs = new int[1 + lenA][1 + lenB];
+
+		for (int i = 1; i < 1 + lenA; i++) {
+			for (int j = 1; j < 1 + lenB; j++) {
+				if (A.charAt(i - 1) == B.charAt(j - 1)) {
+					lcs[i][j] = 1 + lcs[i - 1][j - 1];
+				} else {
+					lcs[i][j] = Math.max(lcs[i - 1][j], lcs[i][j - 1]);
+				}
+			}
+		}
+
+		return lcs[lenA][lenB];
 	}
 
 }
