@@ -1,0 +1,13 @@
+Remaining:
+Graph implementation after Topological sort.
+	Topological Sort
+	Shortest Path algorithm
+		Shortest path in unweighted graph
+		Shortest path in weighted graph
+			Dijkstra's Algorithm
+			BF Algorithm
+	Minimal Spanning tree
+			Prim's Algorithm
+			Kruskal Algorithm
+			
+			

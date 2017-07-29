@@ -1,11 +1,35 @@
 package com.mukeshdua.algorithms;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 
 public class Arr {
-
+	
+	/*
+	 * You are given a map in form of a two-dimensional integer grid where 1 represents land and 0 represents water. Grid cells are connected horizontally/vertically (not diagonally). The grid is completely surrounded by water, and there is exactly one island (i.e., one or more connected land cells). The island doesn't have "lakes" (water inside that isn't connected to the water around the island). One cell is a square with side length 1. The grid is rectangular, width and height don't exceed 100. Determine the perimeter of the island.
+	 */
+	public int islandPerimeter(int[][] grid) {
+        int m=grid.length;
+        int n=grid[0].length;
+        int island=0;
+        int neighbor=0;
+        for(int i=0;i<m;i++)
+        {
+            for(int j=0;j<n;j++)
+            {
+                if(grid[i][j] == 1)
+                {
+                    island++;
+                    if(i<m-1 && grid[i+1][j]==1) neighbor++;
+                    if(j<n-1 && grid[i][j+1]==1) neighbor++;
+                }
+            }
+        }
+        return island*4 - neighbor*2;
+    }
+	
 	/**
 	 * Generate pascal tree
 	 */
@@ -342,7 +366,7 @@ public class Arr {
 		}
 
 	}
-	
+
 	/**
 	 * Find minimum in rotated sorted array in duplicate
 	 */
@@ -362,9 +386,8 @@ public class Arr {
 			return nums[left];
 		}
 		int mid = left + (right - left) / 2;
-		if(nums[left] == nums[right])
-		{
-			return findMinRotatedSortedDuplicateArray(nums, left+1, right);
+		if (nums[left] == nums[right]) {
+			return findMinRotatedSortedDuplicateArray(nums, left + 1, right);
 		}
 		if (nums[left] <= nums[mid]) {
 			return findMinRotatedSortedDuplicateArray(nums, mid, right);
@@ -383,32 +406,33 @@ public class Arr {
 	}
 
 	private static int searchRotatedArray(int[] nums, int left, int right, int target) {
-		 if(left>right) 
-		        return -1;
-		 
+		if (left > right)
+			return -1;
+
 		int mid = left + (right - left) / 2;
 		if (target == nums[mid]) {
 			return mid;
 		}
 
-		if(nums[left] <= nums[mid]){
-	        if(nums[left]<=target && target<nums[mid]){
-	          return searchRotatedArray(nums,left, mid-1, target);
-	        }else{
-	          return  searchRotatedArray(nums, mid+1, right, target);
-	        }
-	    }else {
-	        if(nums[mid]<target&& target<=nums[right]){
-	          return  searchRotatedArray(nums,mid+1, right, target);
-	        }else{
-	          return  searchRotatedArray(nums, left, mid-1, target);
-	        }
-	    }
+		if (nums[left] <= nums[mid]) {
+			if (nums[left] <= target && target < nums[mid]) {
+				return searchRotatedArray(nums, left, mid - 1, target);
+			} else {
+				return searchRotatedArray(nums, mid + 1, right, target);
+			}
+		} else {
+			if (nums[mid] < target && target <= nums[right]) {
+				return searchRotatedArray(nums, mid + 1, right, target);
+			} else {
+				return searchRotatedArray(nums, left, mid - 1, target);
+			}
+		}
 
 	}
-	
+
 	/**
 	 * Permutation
+	 * 
 	 * @param num
 	 * @return
 	 */
@@ -417,21 +441,21 @@ public class Arr {
 		permute(num, 0, result);
 		return result;
 	}
-	 
+
 	private static void permute(int[] num, int start, ArrayList<ArrayList<Integer>> result) {
-	 
+
 		if (start >= num.length) {
 			ArrayList<Integer> item = convertArrayToList(num);
 			result.add(item);
 		}
-	 
+
 		for (int j = start; j <= num.length - 1; j++) {
 			swap(num, start, j);
 			permute(num, start + 1, result);
 			swap(num, start, j);
 		}
 	}
-	 
+
 	private static ArrayList<Integer> convertArrayToList(int[] num) {
 		ArrayList<Integer> item = new ArrayList<Integer>();
 		for (int h = 0; h < num.length; h++) {
@@ -439,10 +463,134 @@ public class Arr {
 		}
 		return item;
 	}
-	 
+
 	private static void swap(int[] a, int i, int j) {
 		int temp = a[i];
 		a[i] = a[j];
 		a[j] = temp;
+	}
+
+	/*
+	 * Given an array of integers where 1 ≤ a[i] ≤ n (n = size of array), some elements appear twice and others appear once.
+	 * 
+	 * Find all the elements of [1, n] inclusive that do not appear in this array.
+	 * 
+	 * Could you do it without extra space and in O(n) runtime? You may assume the returned list does not count as extra space.
+	 */
+	public static List<Integer> findDisappearedNumbers(int[] nums) {
+		for (int i = 0; i < nums.length; i++) {
+			int val = Math.abs(nums[i]) - 1;
+			if (nums[val] > 0) {
+				nums[val] = -nums[val];
+			}
+
+		}
+		List<Integer> result = new ArrayList<Integer>();
+		for (int i = 0; i < nums.length; i++) {
+			if (nums[i] > 0) {
+				result.add(i + 1);
+			}
+		}
+		return result;
+	}
+
+	/*
+	 * Given an array nums, write a function to move all 0's to the end of it while maintaining the relative order of the non-zero elements.
+	 * 
+	 * For example, given nums = [0, 1, 0, 3, 12], after calling your function, nums should be [1, 3, 12, 0, 0].
+	 * 
+	 * Note: You must do this in-place without making a copy of the array. Minimize the total number of operations.
+	 */
+
+	public void moveZeroes(int[] nums) {
+		int i = 0;
+		int j = 0;
+
+		while (j < nums.length) {
+			if (nums[j] == 0) {
+				j++;
+			} else {
+				nums[i] = nums[j];
+				i++;
+				j++;
+			}
+		}
+
+		while (i < nums.length) {
+			nums[i] = 0;
+			i++;
+		}
+	}
+	/*
+	 * Given an integer array, you need to find one continuous subarray that if you only sort this subarray in ascending order, then the whole array will be sorted in ascending order, too.
+
+You need to find the shortest such subarray and output its length.
+
+Example 1:
+Input: [2, 6, 4, 8, 10, 9, 15]
+Output: 5
+Explanation: You need to sort [6, 4, 8, 10, 9] in ascending order to make the whole array sorted in ascending order.
+Note:
+Then length of the input array is in range [1, 10,000].
+The input array may contain duplicates, so ascending order here means <=.
+	 */
+	 public int findUnsortedSubarray(int[] nums) {
+	        int[] snums = nums.clone();
+	        Arrays.sort(snums);
+	        int start = snums.length, end = 0;
+	        for (int i = 0; i < snums.length; i++) {
+	            if (snums[i] != nums[i]) {
+	                start = Math.min(start, i);
+	                end = Math.max(end, i);
+	            }
+	        }
+	        return (end - start >= 0 ? end - start + 1 : 0);
+	    }
+	 
+	 /*
+	  * Given a set of distinct integers, nums, return all possible subsets.
+
+Note: The solution set must not contain duplicate subsets.
+
+For example,
+If nums = [1,2,3], a solution is:
+	  */
+	 public List<List<Integer>> subsets(int[] S) {
+		    if (S == null)
+				return null;
+		 
+			Arrays.sort(S);
+		 
+			List<List<Integer>> result = new ArrayList<List<Integer>>();
+		 
+			for (int i = 0; i < S.length; i++) {
+				List<List<Integer>> temp = new ArrayList<List<Integer>>();
+		 
+				//get sets that are already in result
+				for (List<Integer> a : result) {
+					temp.add(new ArrayList<Integer>(a));
+				}
+		 
+				//add S[i] to existing sets
+				for (List<Integer> a : temp) {
+					a.add(S[i]);
+				}
+		 
+				//add S[i] only as a set
+				List<Integer> single = new ArrayList<Integer>();
+				single.add(S[i]);
+				temp.add(single);
+		 
+				result.addAll(temp);
+			}
+		 
+			//add empty set
+			result.add(new ArrayList<Integer>());
+		 
+			return result;
+		    }
+
+	public static void main(String[] args) {
+		findDisappearedNumbers(new int[] { 4, 3, 2, 7, 8, 2, 3, 1 });
 	}
 }

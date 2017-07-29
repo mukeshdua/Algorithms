@@ -27,5 +27,21 @@ public class Bit {
 		}
 		return total_ones;
 	}
+	
+	/*
+	 * Given an array of integers, every element appears twice except for one. Find that single one.
+	 */
+	public static int singleNumber(int[] A) {
+		int x = 0;
+		for (int a : A) {
+			x = x ^ a;
+		}
+		return x;
+	}
+	
+	public static void main(String[] args)
+	{
+		singleNumber(new int[]{4,1,3,1,4});
+	}
 
 }

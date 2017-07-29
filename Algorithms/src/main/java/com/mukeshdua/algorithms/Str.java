@@ -3,10 +3,55 @@ package com.mukeshdua.algorithms;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Stack;
 
 public class Str {
 
+	/**
+	 * Valid Anagram
+	 * 
+	 * @param s
+	 * @param t
+	 * @return
+	 */
+	public static boolean isAnagram(String s, String t) {
+
+		if (s == null || t == null) {
+			return false;
+		}
+		if (s.length() != t.length()) {
+			return false;
+		}
+
+		HashMap<Character, Integer> sMap = getHashMap(s);
+		HashMap<Character, Integer> tMap = getHashMap(t);
+
+		return isH1EqualsH2(sMap, tMap) && isH1EqualsH2(tMap, sMap);
+
+	}
+	
+	public static void reverseUsingXOR(String str1) {
+		
+		char[] str = str1.toCharArray();
+        int low = 0;
+        int high = str.length - 1;
+
+        while (low < high) {
+            str[low] = (char) (str[low] ^ str[high]);
+            str[high] = (char) (str[low] ^ str[high]);   
+            str[low] = (char) (str[low] ^ str[high]);
+            low++;
+            high--;
+        }
+
+        //display reversed string
+        for (int i = 0; i < str.length; i++) {
+            System.out.print(str[i]);
+        }
+    }
+
+	
 	private static boolean isH1EqualsH2(HashMap<Character, Integer> h1, HashMap<Character, Integer> h2) {
 		for (Character sChar : h1.keySet()) {
 			if (!h2.containsKey(sChar) || (h2.containsKey(sChar) && !h1.get(sChar).equals(h2.get(sChar)))) {
@@ -89,6 +134,8 @@ public class Str {
 	 * @param s
 	 * @return
 	 */
+	//[]
+	//
 	public static boolean isValid(String s) {
 		if (s.length() == 1) {
 			return false;
@@ -166,28 +213,7 @@ public class Str {
 		return result;
 	}
 
-	/**
-	 * Valid Anagram
-	 * 
-	 * @param s
-	 * @param t
-	 * @return
-	 */
-	public static boolean isAnagram(String s, String t) {
-
-		if (s == null || t == null) {
-			return false;
-		}
-		if (s.length() != t.length()) {
-			return false;
-		}
-
-		HashMap<Character, Integer> sMap = getHashMap(s);
-		HashMap<Character, Integer> tMap = getHashMap(t);
-
-		return isH1EqualsH2(sMap, tMap) && isH1EqualsH2(tMap, sMap);
-
-	}
+	
 
 	/**
 	 * Compare two version numbers version1 and version2. If version1 > version2 return 1, if version1 < version2 return -1, otherwise return 0. You may assume
@@ -353,5 +379,60 @@ public class Str {
 
 		return lcs[lenA][lenB];
 	}
+	
+	/*
+	 * Given a string s and a non-empty string p, find all the start indices of p's anagrams in s.
+
+Strings consists of lowercase English letters only and the length of both strings s and p will not be larger than 20,100.
+
+The order of output does not matter.
+	 */
+	public static List<Integer> findAnagrams(String s, String p) {
+        Map<Character,Integer> h1 = getMap(p);
+        
+        List<Integer> result= new ArrayList<Integer>();
+        for(int count=0;count<=s.length()-p.length();count++)
+        {
+            Map<Character,Integer> h2 = getMap(s.substring(count,count+p.length()));
+            if(isH1EqualsH2(h1,h2))
+            {
+                result.add(count);
+            }
+        }
+        return result;
+    }
+    
+    private static Map<Character,Integer> getMap(String str)
+    {
+        Map<Character,Integer> val= new HashMap<Character,Integer>();
+        for (int count = 0; count < str.length(); count++) 
+        {
+            Character c=str.charAt(count);
+            int tempVal=1;
+            if(val.containsKey(c))
+            {
+                tempVal=val.get(c) + 1;
+            }
+            val.put(c,tempVal);
+        }
+        return val;
+    }
+    
+    
+    private static boolean isH1EqualsH2(Map<Character, Integer> h1, Map<Character, Integer> h2) {
+		for (Character sChar : h1.keySet()) {
+			if (!h2.containsKey(sChar) || (h2.containsKey(sChar) && !h1.get(sChar).equals(h2.get(sChar)))) {
+				return false;
+			}
+		}
+		return true;
+	}
+    
+    public static void main(String[] args)
+    {
+    	reverseUsingXOR("Test");
+    	findAnagrams("abab","ab");
+    	
+    }
 
 }

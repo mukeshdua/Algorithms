@@ -4,7 +4,11 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Queue;
-
+//Tree can be travered 4 ways:
+// 1. Preorder- Recursion
+// 2. Inorder - Recursion
+// 3. PostOrder - Recursion
+// 4. Level order - Queue
 public class Tree {
 	TreeNode	root;
 
@@ -21,6 +25,37 @@ public class Tree {
 		return sortedArrayToBST(arr, 0, arr.length - 1);
 
 	}
+	
+	/*
+	 * Given a Binary Search Tree (BST), convert it to a Greater Tree such that every key of the original BST is changed to the original key plus sum of all keys greater than the original key in BST.
+
+Example:
+
+Input: The root of a Binary Search Tree like this:
+              5
+            /   \
+           2     13
+
+Output: The root of a Greater Tree like this:
+             18
+            /   \
+          20     13
+
+	 */
+	int sum=0;
+    public TreeNode convertBST(TreeNode root) {
+        if(root==null)
+        {
+            return null;
+        }
+        
+        convertBST(root.right);
+        int temp=root.val;
+        sum=sum+temp;
+        root.val=sum;
+        convertBST(root.left);
+        return root;
+    }
 
 	/**
 	 * Convert sorted array to Tree
@@ -91,6 +126,8 @@ public class Tree {
 
 	}
 
+	
+	
 	/**
 	 * Given a binary tree, return the level order traversal of its nodes' values. (ie, from left to right, level by level).
 	 * 
@@ -205,7 +242,7 @@ public class Tree {
 	}
 
 	/**
-	 * Check if 2 BSTs are same
+	 * vb
 	 * 
 	 * @param p
 	 * @param q
