@@ -1,5 +1,8 @@
 REVISION:
-	BELOW SUMMARY
+	COURSE SYLLABUS
+	DATA STRUCTURE
+	ALGORITHMS
+	PROBLEMS
 	TEST PLAN
 	TESTCASES TYPES
 	PROGRAMS IN ALGORITHMS
@@ -48,14 +51,18 @@ Courses syllabus
 
  Problem solving using Data Structures and Algorithms
 4.1 Arrays.
-Find a pair in an array of size 'n', whose sum is X - 
+Find a pair in an array of size 'n', whose sum is X - Done 
 	2 methods- quicksort and hashmap
-Find a majority element in an array of size 'n' - using hashmap
+Find a majority element in an array of size 'n' - using hashmap - Done
+Find the number occuring odd number of times in a given array of size 'n' - USING XOR - Done
+Algorithm to reverse an array - Done
 
-Find the number occuring odd number of times in a given array of size 'n'
-Algorithm to reverse an array
-Algorithm to rotate array of size 'n' by 'd' elements
-Algorithm to segregate 0's and 1's in an array
+Algorithm to rotate array of size 'n' by 'd' elements - Done
+Algorithm to segregate 0's and 1's in an array - Done
+	Count the number of 0s. Let count be C.
+	2) Once we have count, we can put C 0s at the beginning and 1s at the remaining n – C positions in array.
+
+
 Find the maximum difference between two elements such that larger element appears after the smaller element
 Algorithm to merge an array of size 'n' into another array of size 'm+n'.
 Algorithm to find two repeating numbers in a given array
@@ -84,12 +91,19 @@ Given an array and an integer 'k', find the maximum, for each and every contiguo
 Search an element in a sorted rotated array
 Find the maximum value of a[j]-a[i]+a[l]-a[k], for every four indices i, j, k, l such that i< j < k < l.
 ...many more
+
+
 4.2 Linked List
 Algorithm to find the nth node from end of the linked list
+	loop and position
 Algorithm to find the middle node in a linked list
+	two counter slow and fast
 Algorithm to find the intersection point of two linked lists
 Reversal of linked list
+	Method 1 : Stack
+	Method 2: 
 Algorithm to detect loop in linked list
+	two counter slow and fast- 
 Algorithm to find starting node of a loop in a linked list
 Algorithm to check given linked list is palindrome (or) not
 Algorithm to reverse alternative K nodes in a single linked list

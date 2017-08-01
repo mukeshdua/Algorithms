@@ -428,6 +428,29 @@ The order of output does not matter.
 		return true;
 	}
     
+    /**
+     * Slow method of pattern matching
+     */
+    public boolean hasSubstring(char[] text, char[] pattern){
+        int i=0;
+        int j=0;
+        int k = 0;
+        while(i < text.length && j < pattern.length){
+            if(text[i] == pattern[j]){
+                i++;
+                j++;
+            }else{
+                j=0;
+                k++;
+                i = k;
+            }
+        }
+        if(j == pattern.length){
+            return true;
+        }
+        return false;
+    }
+    
     public static void main(String[] args)
     {
     	reverseUsingXOR("Test");

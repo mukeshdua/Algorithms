@@ -593,4 +593,90 @@ If nums = [1,2,3], a solution is:
 	public static void main(String[] args) {
 		findDisappearedNumbers(new int[] { 4, 3, 2, 7, 8, 2, 3, 1 });
 	}
+	
+	int subArraySum(int arr[], int n, int sum) 
+    {
+        int curr_sum = arr[0], start = 0, i;
+ 
+        // Pick a starting point
+        for (i = 1; i <= n; i++) 
+        {
+            // If curr_sum exceeds the sum, then remove the starting elements
+            while (curr_sum > sum && start < i-1)
+            {
+                curr_sum = curr_sum - arr[start];
+                start++;
+            }
+             
+            // If curr_sum becomes equal to sum, then return true
+            if (curr_sum == sum) 
+            {
+                int p = i-1;
+                System.out.println("Sum found between indexes " + start
+                        + " and " + p);
+                return 1;
+            }
+             
+            // Add this element to curr_sum
+            if (i < n)
+            curr_sum = curr_sum + arr[i];
+             
+        }
+ 
+        System.out.println("No subarray found");
+        return 0;
+    }
+	
+	 // function to calculate median
+    static int getMedian(int ar1[], int ar2[], int n)
+    {   
+        int i = 0;  
+        int j = 0; 
+        int count;
+        int m1 = -1, m2 = -1;
+      
+        /* Since there are 2n elements, median will 
+           be average of elements at index n-1 and 
+           n in the array obtained after merging ar1 
+           and ar2 */
+        for (count = 0; count <= n; count++)
+        {
+            /* Below is to handle case where all 
+              elements of ar1[] are smaller than 
+              smallest(or first) element of ar2[] */
+            if (i == n)
+            {
+                m1 = m2;
+                m2 = ar2[0];
+                break;
+            }
+      
+            /* Below is to handle case where all 
+               elements of ar2[] are smaller than 
+               smallest(or first) element of ar1[] */
+            else if (j == n)
+            {
+                m1 = m2;
+                m2 = ar1[0];
+                break;
+            }
+      
+            if (ar1[i] < ar2[j])
+            {   
+                /* Store the prev median */
+                m1 = m2;  
+                m2 = ar1[i];
+                i++;
+            }
+            else
+            {
+                /* Store the prev median */
+                m1 = m2;  
+                m2 = ar2[j];
+                j++;
+            }
+        }
+      
+        return (m1 + m2)/2;
+    }
 }

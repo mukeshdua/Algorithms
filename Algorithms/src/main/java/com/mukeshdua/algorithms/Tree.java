@@ -4,13 +4,14 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Queue;
+
 //Tree can be travered 4 ways:
 // 1. Preorder- Recursion
 // 2. Inorder - Recursion
 // 3. PostOrder - Recursion
 // 4. Level order - Queue
 public class Tree {
-	TreeNode	root;
+	TreeNode root;
 
 	Tree(int[] arr) throws Exception {
 		// if (arr.length == 0)
@@ -25,37 +26,32 @@ public class Tree {
 		return sortedArrayToBST(arr, 0, arr.length - 1);
 
 	}
-	
+
 	/*
-	 * Given a Binary Search Tree (BST), convert it to a Greater Tree such that every key of the original BST is changed to the original key plus sum of all keys greater than the original key in BST.
-
-Example:
-
-Input: The root of a Binary Search Tree like this:
-              5
-            /   \
-           2     13
-
-Output: The root of a Greater Tree like this:
-             18
-            /   \
-          20     13
-
+	 * Given a Binary Search Tree (BST), convert it to a Greater Tree such that every key of the original BST is changed to the original key plus sum of all
+	 * keys greater than the original key in BST.
+	 * 
+	 * Example:
+	 * 
+	 * Input: The root of a Binary Search Tree like this: 5 / \ 2 13
+	 * 
+	 * Output: The root of a Greater Tree like this: 18 / \ 20 13
+	 * 
 	 */
-	int sum=0;
-    public TreeNode convertBST(TreeNode root) {
-        if(root==null)
-        {
-            return null;
-        }
-        
-        convertBST(root.right);
-        int temp=root.val;
-        sum=sum+temp;
-        root.val=sum;
-        convertBST(root.left);
-        return root;
-    }
+	int sum = 0;
+
+	public TreeNode convertBST(TreeNode root) {
+		if (root == null) {
+			return null;
+		}
+
+		convertBST(root.right);
+		int temp = root.val;
+		sum = sum + temp;
+		root.val = sum;
+		convertBST(root.left);
+		return root;
+	}
 
 	/**
 	 * Convert sorted array to Tree
@@ -126,8 +122,6 @@ Output: The root of a Greater Tree like this:
 
 	}
 
-	
-	
 	/**
 	 * Given a binary tree, return the level order traversal of its nodes' values. (ie, from left to right, level by level).
 	 * 
@@ -436,5 +430,49 @@ Output: The root of a Greater Tree like this:
 		return left || right;
 
 	}
+
+	TreeNode mirror(TreeNode node) {
+		if (node == null)
+			return node;
+
+		/* do the subtrees */
+		TreeNode left = mirror(node.left);
+		TreeNode right = mirror(node.right);
+
+		/* swap the left and right pointers */
+		node.left = right;
+		node.right = left;
+
+		return node;
+	}
+	
+	int isSumTree(TreeNode node) 
+    {
+        int ls, rs;
+  
+        /* If node is NULL or it's a leaf node then
+           return true */
+        if ((node == null) || (node.left == null && node.right == null))
+            return 1;
+  
+        /* Get sum of nodes in left and right subtrees */
+        ls = sum(node.left);
+        rs = sum(node.right);
+  
+        /* if the node and both of its children satisfy the
+           property return 1 else 0*/
+        if ((node.val == ls + rs) && (isSumTree(node.left) != 0)
+                && (isSumTree(node.right)) != 0)
+            return 1;
+  
+        return 0;
+    }
+	
+	int sum(TreeNode node) 
+    {
+        if (node == null)
+            return 0;
+        return sum(node.left) + node.val + sum(node.right);
+    }
 
 }

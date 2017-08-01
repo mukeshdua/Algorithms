@@ -15,6 +15,32 @@ public class LinkList {
 		return s;
 
 	}
+	
+	void printNthFromLast(int n,ListNode head)
+    {
+        int len = 0;
+        ListNode temp = head;
+ 
+        // 1) count the number of nodes in Linked List
+        while (temp != null)
+        {
+            temp = temp.next;
+            len++;
+        }
+ 
+        // check if value of n is not more than length of
+        // the linked list
+        if (len < n)
+            return;
+ 
+        temp = head;
+ 
+        // 2) get the (n-len+1)th node from the begining
+        for (int i = 1; i < len-n+1; i++)
+            temp = temp.next;
+ 
+        System.out.println(temp.val);
+    }
 
 	/**
 	 * Check if linked list is palindrome
